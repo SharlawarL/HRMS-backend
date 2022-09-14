@@ -1,0 +1,283 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "HRMS Backend Express API Swagger",
+        "description": "This is a backened REST API application made with Express.",
+        "license": {
+            "name": "MIT",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Employee",
+            "description": "API's for Employee management"
+        },
+        {
+            "name": "Admin",
+            "description": "API's for Admin management"
+        },
+        {
+            "name": "OTP",
+            "description": "API's for OTP"
+        },
+        {
+            "name": "Payment",
+            "description": "API's for Payment"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/employee/save-employee": {
+            "post": {
+                "summary": "To register new Employee",
+                "tags": [
+                    "Employee"
+                ],
+                "description": "Create new user in system as a Employee",
+                "parameters": [
+                    {
+                        "name": "SaveEmployee",
+                        "in": "body",
+                        "required": true,
+                        "description": "Employee req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New Parent created",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/employee/get-employee": {
+            "get": {
+                "summary": "To all Employee list",
+                "tags": [
+                    "Employee"
+                ],
+                "description": "Fetch all Employee",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get All Employee",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/employee/get-employee-by-id/{employeeId}": {
+            "get": {
+                "summary": "Get Employee by id",
+                "tags": [
+                    "Employee"
+                ],
+                "description": "Fetch empolyee by ID",
+                "parameters": [
+                    {
+                        "name": "employeeId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Employee id to fetch details"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get employee by ID",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/employee/delete-employee-by-id/{employeeId}": {
+            "get": {
+                "summary": "Delete Employee by id",
+                "tags": [
+                    "Employee"
+                ],
+                "description": "Delete empolyee by ID",
+                "parameters": [
+                    {
+                        "name": "employeeId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Employee id to Delete"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete employee by ID",
+                        "schema": {
+                            "$ref": "#/definitions/Employee"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+            "/employee/update-employee": {
+                "post": {
+                    "summary": "Update existing Employee By Using ID",
+                    "tags": [
+                        "Employee"
+                    ],
+                    "description": "Update Employee",
+                    "parameters": [
+                        {
+                            "name": "UpdateEmployee",
+                            "in": "body",
+                            "required": true,
+                            "description": "Employee req.body fields",
+                            "schema": {
+                                "$ref": "#/definitions/updateEmployee"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Update Employee",
+                            "schema": {
+                                "$ref": "#/definitions/updateEmployee"
+                            }
+                        },
+                        "400": {
+                            "description": "Bad request"
+                        },
+                        "401": {
+                            "description": "Unauthorized"
+                        },
+                        "422": {
+                            "description": "Unprocessable Entity"
+                        },
+                        "500": {
+                            "description": "Internal server error"
+                        }
+                    }
+            }
+        }
+    },
+    "definitions": {
+        "Employee": {
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "number"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateEmployee": {
+            "properties": {
+                "empId": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "number"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

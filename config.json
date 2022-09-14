@@ -1,0 +1,4 @@
+{
+    "connectionString": "mongodb+srv://vinaykumar:vinay@06@bostonbitez.wsz40.mongodb.net/intutors?retryWrites=true&w=majority",
+    "secret": "abcdefghijklmnopqurstuvwxyz"
+}
