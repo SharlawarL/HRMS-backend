@@ -2,6 +2,40 @@ const services = require('../services')
 
 module.exports = {
     /**
+     * User Login
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+     loginUser(req, res, next) {
+        try {
+            let userData = {
+                email: req.body.email,
+                password: req.body.password
+            }
+            console.log(userData)
+            var response = {}
+
+            services.loginUser(userData, (err, result) => {
+                if (err) {
+                    response.success = false
+                    response.statusCode = err.statusCode
+                    response.message = err.message
+                    return res.status(err.statusCode).send(response)
+                } else {
+                    response.success = true
+                    response.statusCode = result.statusCode
+                    response.message = result.message
+                    response.result = result.result
+
+                    return res.status(result.statusCode).send(response)
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
+    /**
      * Register User
      * @param {*} req 
      * @param {*} res 

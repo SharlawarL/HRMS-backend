@@ -21,9 +21,9 @@ var swagger_doc = require('./lib/swagger-ui/api_docs');
 
 
 app.use('/', routes);
-app.use('/sakshi/api_docs', swagger_ui.serve, swagger_ui.setup(swagger_doc));
+app.use('/hrms/api_docs', swagger_ui.serve, swagger_ui.setup(swagger_doc));
 app.get('/', (req, res) => {
-  res.redirect('/sakshi/api_docs');
+  res.redirect('/hrms/api_docs');
 });
 
 // Start server

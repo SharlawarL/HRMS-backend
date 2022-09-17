@@ -18,6 +18,10 @@ var corsOptions = {
  * User API's
  */
 // register user
+routes.post('/user/login-user',
+    cors(corsOptions) ,
+    controller.loginUser);
+// register user
 routes.post('/user/save-user',
     cors(corsOptions) ,
     controller.registerUser);

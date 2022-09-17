@@ -42,6 +42,49 @@
         "application/json"
     ],
     "paths": {
+        "/user/login-user": {
+            "post": {
+                "summary": "Login user by email and password",
+                "tags": [
+                    "User"
+                ],
+                "description": "login user",
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "required": true,
+                        "description": "User req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/UserLogin"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login user by email and password",
+                        "schema": {
+                            "$ref": "#/definitions/UserLogin"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/user/save-user": {
             "post": {
                 "summary": "To register new user",
@@ -440,6 +483,16 @@
         }
     },
     "definitions": {
+        "UserLogin": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "User": {
             "properties": {
                 "firstname": {

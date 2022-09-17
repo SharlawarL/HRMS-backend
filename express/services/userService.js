@@ -5,6 +5,44 @@ var bcrypt = require('bcrypt');
 
 module.exports = {
     /**
+     * User Login
+     * @param {*} userData 
+     * @param {*} callback 
+     * @returns 
+     */
+     loginUser(userData, callback) {
+        try {
+            model.findUser({ email: userData.email }, (err, result) => {
+                if (err) return callback({ message: message, statusCode: 400 }, null)
+                else {
+                    bcrypt.compare(userData.password, result[0].password, async (err, data) => {
+                        if (err) return callback({ message: message, statuscode: 400 }, null)
+                        else {
+                            if (data) {
+                                if (result.length !== 0) {
+                                    if (err) return callback({ message: message, statusCode: 400 }, null)
+                                    else return callback(null, {
+                                        message: "Login Successfully",
+                                        result: result,
+                                        statusCode: 200
+                                    })
+                                } else return callback(null, {
+                                    message: "Not a valid user",
+                                    result: null,
+                                    statusCode: 404
+                                })
+                            } else {
+                                return callback(null, { message: "please enter valid password", statusCode: 404 })
+                            }
+                        }
+                    })
+                }
+            })
+        } catch (err) {
+            return callback({ message: message, statusCode: 404 }, null)
+        }
+    },
+    /**
      * Register user
      * @param {*} userData 
      * @param {*} callback 

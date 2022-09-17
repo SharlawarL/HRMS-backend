@@ -1,6 +1,7 @@
 module.exports = {
 
     //User Controller
+    loginUser: require('./userController').loginUser,
     registerUser: require('./userController').registerUser,
     getUser: require('./userController').getUser,
     getUserById: require('./userController').getUserById,
