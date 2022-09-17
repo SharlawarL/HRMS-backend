@@ -1,5 +1,12 @@
 module.exports = {
 
+    //User
+    registerUser: require('./userService').registerUser,
+    getUser: require('./userService').getUser,
+    getUserById: require('./userService').getUserById,
+    deleteUserById: require('./userService').deleteUserById,
+    updateUser: require('./userService').updateUser,
+
     //Employee
     registerEmployee: require('./employeeService').registerEmployee,
     getEmployee: require('./employeeService').getEmployee,

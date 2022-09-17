@@ -15,9 +15,33 @@ var corsOptions = {
 }
 
 /**
+ * User API's
+ */
+// register user
+routes.post('/user/save-user',
+    cors(corsOptions) ,
+    controller.registerUser);
+//Get employee
+routes.get('/user/get-user',
+    cors(corsOptions) ,
+    controller.getUser);
+//get employee by id
+routes.get('/user/get-user-by-id/:userId',
+    cors(corsOptions) ,
+    controller.getUserById);
+//delete employee by id
+routes.get('/user/delete-user-by-id/:userId',
+    cors(corsOptions) ,
+    controller.deleteUserById);
+// update parent
+routes.post('/user/update-user',
+    cors(corsOptions) ,
+    controller.updateUser);
+
+/**
  * Employee API's
  */
-// register parent
+// register employee
 routes.post('/employee/save-employee',
     cors(corsOptions) ,
     controller.registerEmployee);
@@ -33,7 +57,7 @@ routes.get('/employee/get-employee-by-id/:employeeId',
 routes.get('/employee/delete-employee-by-id/:employeeId',
     cors(corsOptions) ,
     controller.deleteEmployeeById);
-// update parent
+// update employee
 routes.post('/employee/update-employee',
     cors(corsOptions) ,
     controller.updateEmployee);
