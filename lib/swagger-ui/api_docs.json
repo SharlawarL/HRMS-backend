@@ -12,6 +12,10 @@
     "basePath": "/",
     "tags": [
         {
+            "name": "User",
+            "description": "API's for User management"
+        },
+        {
             "name": "Employee",
             "description": "API's for Employee management"
         },
@@ -38,6 +42,204 @@
         "application/json"
     ],
     "paths": {
+        "/user/save-user": {
+            "post": {
+                "summary": "To register new user",
+                "tags": [
+                    "User"
+                ],
+                "description": "Create new user in system as a User",
+                "parameters": [
+                    {
+                        "name": "SaveUser",
+                        "in": "body",
+                        "required": true,
+                        "description": "User req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New Parent created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/get-user": {
+            "get": {
+                "summary": "To all User list",
+                "tags": [
+                    "User"
+                ],
+                "description": "Fetch all User",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get All User",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/get-user-by-id/{userId}": {
+            "get": {
+                "summary": "Get User by id",
+                "tags": [
+                    "User"
+                ],
+                "description": "Fetch User by ID",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "description": "User id to fetch details"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get User by ID",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/delete-user-by-id/{userId}": {
+            "get": {
+                "summary": "Delete User by id",
+                "tags": [
+                    "User"
+                ],
+                "description": "Delete User by ID",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "required": true,
+                        "description": "User id to Delete"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete User by ID",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/user/update-user": {
+            "post": {
+                "summary": "Update existing User By Using ID",
+                "tags": [
+                    "User"
+                ],
+                "description": "Update User",
+                "parameters": [
+                    {
+                        "name": "UpdateUser",
+                        "in": "body",
+                        "required": true,
+                        "description": "User req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/updateUser"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update User",
+                        "schema": {
+                            "$ref": "#/definitions/updateUser"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
         "/employee/save-employee": {
             "post": {
                 "summary": "To register new Employee",
@@ -193,51 +395,92 @@
                 }
             }
         },
-            "/employee/update-employee": {
-                "post": {
-                    "summary": "Update existing Employee By Using ID",
-                    "tags": [
-                        "Employee"
-                    ],
-                    "description": "Update Employee",
-                    "parameters": [
-                        {
-                            "name": "UpdateEmployee",
-                            "in": "body",
-                            "required": true,
-                            "description": "Employee req.body fields",
-                            "schema": {
-                                "$ref": "#/definitions/updateEmployee"
-                            }
-                        }
-                    ],
-                    "produces": [
-                        "application/json"
-                    ],
-                    "responses": {
-                        "200": {
-                            "description": "Update Employee",
-                            "schema": {
-                                "$ref": "#/definitions/updateEmployee"
-                            }
-                        },
-                        "400": {
-                            "description": "Bad request"
-                        },
-                        "401": {
-                            "description": "Unauthorized"
-                        },
-                        "422": {
-                            "description": "Unprocessable Entity"
-                        },
-                        "500": {
-                            "description": "Internal server error"
+        "/employee/update-employee": {
+            "post": {
+                "summary": "Update existing Employee By Using ID",
+                "tags": [
+                    "Employee"
+                ],
+                "description": "Update Employee",
+                "parameters": [
+                    {
+                        "name": "UpdateEmployee",
+                        "in": "body",
+                        "required": true,
+                        "description": "Employee req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/updateEmployee"
                         }
                     }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Employee",
+                        "schema": {
+                            "$ref": "#/definitions/updateEmployee"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
             }
         }
     },
     "definitions": {
+        "User": {
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "number"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "updateUser": {
+            "properties": {
+                "empId": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "number"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "Employee": {
             "properties": {
                 "firstname": {
