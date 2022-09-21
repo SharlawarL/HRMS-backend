@@ -25,19 +25,19 @@ routes.post('/user/login-user',
 routes.post('/user/save-user',
     cors(corsOptions) ,
     controller.registerUser);
-//Get employee
+//Get user
 routes.get('/user/get-user',
     cors(corsOptions) ,
     controller.getUser);
-//get employee by id
+//get user by id
 routes.get('/user/get-user-by-id/:userId',
     cors(corsOptions) ,
     controller.getUserById);
-//delete employee by id
+//delete user by id
 routes.get('/user/delete-user-by-id/:userId',
     cors(corsOptions) ,
     controller.deleteUserById);
-// update parent
+// update user
 routes.post('/user/update-user',
     cors(corsOptions) ,
     controller.updateUser);
