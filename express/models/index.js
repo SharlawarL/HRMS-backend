@@ -10,4 +10,10 @@ module.exports = {
     findEmployee: require('./employeeModel').find,
     deleteEmployee: require('./employeeModel').delete,
     updateEmployee: require('./employeeModel').update,
+
+    //Organization
+    createLocation: require('./locationModel').create,
+    findLocation: require('./locationModel').find,
+    deleteLocation: require('./locationModel').delete,
+    updateLocation: require('./locationModel').update,
 }

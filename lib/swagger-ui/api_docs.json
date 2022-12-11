@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "version": "1.0.0",
-        "title": "HRMS Backend Express API Swagger",
+        "title": "Kool HRMS Backend Express API Swagger",
         "description": "This is a backened REST API application made with Express.",
         "license": {
             "name": "MIT",
@@ -480,6 +480,244 @@
                     }
                 }
             }
+        },
+        "/organization/save-location": {
+            "post": {
+                "summary": "To add new Location",
+                "tags": [
+                    "Location"
+                ],
+                "description": "Create new location in Organization",
+                "parameters": [
+                    {
+                        "name": "Location",
+                        "in": "body",
+                        "required": true,
+                        "description": "Location req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/SaveLocation"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New Location created",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/organization/get-location": {
+            "get": {
+                "summary": "To all Location list",
+                "tags": [
+                    "Location"
+                ],
+                "description": "Fetch all Location",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get All Location",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/organization/get-location-by-id/{id}": {
+            "get": {
+                "summary": "Get Location by id",
+                "tags": [
+                    "Location"
+                ],
+                "description": "Fetch Location by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Location id to fetch details"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get Location by ID",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/organization/get-location-by-company/{id}": {
+            "get": {
+                "summary": "Get Location by company",
+                "tags": [
+                    "Location"
+                ],
+                "description": "Fetch Location by Company",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Location id to fetch details"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get Location by ID",
+                        "schema": {
+                            "$ref": "#/definitions/Location"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/organization/delete-location-by-id/{id}": {
+            "get": {
+                "summary": "Delete Location by id",
+                "tags": [
+                    "Location"
+                ],
+                "description": "Delete Location by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Location id to Delete"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Delete Location by ID",
+                        "schema": {
+                            "$ref": "#/definitions/DeleteLocation"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/organization/update-location": {
+            "post": {
+                "summary": "Update existing Location By Using ID",
+                "tags": [
+                    "Location"
+                ],
+                "description": "Update Location",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "body",
+                        "required": true,
+                        "description": "Location req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateLocation"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Update Location",
+                        "schema": {
+                            "$ref": "#/definitions/UpdateLocation"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -571,6 +809,82 @@
                     "type": "string"
                 },
                 "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Location": {
+            "properties": {
+                "location": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "pincode": {
+                    "type": "string"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "type": "string"
+                },
+                "updatedOn": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "createdOn": {
+                    "type": "string"
+                }
+            }
+        },
+        "SaveLocation": {
+            "properties": {
+                "location": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "pincode": {
+                    "type": "string"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateLocation": {
+            "properties": {
+                "location": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "pincode": {
+                    "type": "string"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "type": "string"
+                },
+                "updatedOn": {
+                    "type": "string"
+                }
+            }
+        },
+        "DeleteLocation": {
+            "properties": {
+                "id": {
                     "type": "string"
                 }
             }

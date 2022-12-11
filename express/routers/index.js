@@ -67,5 +67,32 @@ routes.post('/employee/update-employee',
     controller.updateEmployee);
 
 
+/**
+ * Organization API's
+ */
+// save location
+routes.post('/organization/save-location',
+    cors(corsOptions) ,
+    controller.locationSave);
+//Get location
+routes.get('/organization/get-location',
+    cors(corsOptions) ,
+    controller.getLocation);
+//get location by id
+routes.get('/organization/get-location-by-id/:id',
+    cors(corsOptions) ,
+    controller.getLocationById);
+//get location by company
+routes.get('/organization/get-location-by-company/:id',
+    cors(corsOptions) ,
+    controller.getLocationByCompany);
+//delete location by id
+routes.get('/organization/delete-location-by-id/:id',
+    cors(corsOptions) ,
+    controller.deleteLocationById);
+// update location
+routes.post('/organization/update-location',
+    cors(corsOptions) ,
+    controller.updateLocation);
 
 module.exports = routes;

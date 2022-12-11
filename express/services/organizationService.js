@@ -4,73 +4,21 @@ var utility = require('../../utility')
 var bcrypt = require('bcrypt');
 
 module.exports = {
-    /**
-     * User Login
-     * @param {*} userData 
-     * @param {*} callback 
-     * @returns 
-     */
-     loginUser(userData, callback) {
-        try {
-            model.findUser({ email: userData.email }, (err, result) => {
-                if (err) return callback({ message: message, statusCode: 400 }, null)
-                else {
-                    if(result.length > 0)
-                    {
-                        bcrypt.compare(userData.password, result[0].password, async (err, data) => {
-                            if (err) return callback({ message: message, statuscode: 400 }, null)
-                            else {
-                                if (data) {
-                                    if (result.length !== 0) {
-                                        if (err) return callback({ message: message, statusCode: 400 }, null)
-                                        else return callback(null, {
-                                            message: "Login Successfully",
-                                            result: result,
-                                            statusCode: 200,
-                                            success: true
-                                        })
-                                    } else return callback(null, {
-                                        message: "Not a valid user",
-                                        result: null,
-                                        statusCode: 200,
-                                        success: false
-                                    })
-                                } else {
-                                    return callback(null, { message: "Please enter valid password", statusCode: 200 })
-                                }
-                            }
-                        })
 
-                    } else {
-                        return callback(null, {
-                            message: "User not exits.",
-                            result: null,
-                            statusCode: 200,
-                            success: false
-                        })
-                    }                    
-                }
-            })
-        } catch (err) {
-            return callback({ message: message, statusCode: 404 }, null)
-        }
-    },
     /**
      * Register user
-     * @param {*} userData 
+     * @param {*} params 
      * @param {*} callback 
      * @returns 
      */
-    registerUser(userData, callback) {
+    locationSave(params, callback) {
         try {
-            model.findUser({ email: userData.email }, async (err, data) => {
+            model.findLocation(params.data, async (err, data) => {
+                console.log(params)
                 if (err) return callback({ message: message, statusCode: 200, status : false }, null)
                 else {
                     if (data.length === 0) {
-                        userData.data.password = await utility.hashPassword(userData.data.password)
-                        console.log(userData)
-                        model.createUser(userData.data, (err, result) => {
-                        console.log(result)
+                        model.createLocation(params.data, (err, result) => {
                             if (err) return callback({ message: message, statusCode: 200, status : false }, null)
                             else {
                                 return callback(null, {
@@ -81,8 +29,9 @@ module.exports = {
                                 })
                             }
                         })
+                        
                     } else return callback(null, {
-                        message: `[${userData.email}] is already registered`,
+                        message: `[${params.data.location}] is already exits`,
                         result: null,
                         statusCode: 200,
                         success: false
@@ -99,20 +48,20 @@ module.exports = {
      * @param {*} callback 
      * @returns 
      */
-    getUser(userData, callback) {
+    getLocation(params, callback) {
         try {
-            model.findUser({}, (err, result) => {
+            model.findLocation({}, (err, result) => {
                 if (result) {
                     if (result.length !== 0) {
                         if (err) return callback({ message: message, statusCode: 200, success: false }, null)
                         else return callback(null, {
-                            message: "User Data",
+                            message: "Location Data",
                             result: result,
                             statusCode: 200,
                             success: true
                         })
                     } else return callback(null, {
-                        message: "Not a valid user",
+                        message: "Data not found",
                         result: null,
                         statusCode: 200,
                         success: false
@@ -126,19 +75,21 @@ module.exports = {
         }
     },
     /**
-     * Get User by ID
-     * @param {*} userData 
+     * Get Location By filter
+     * @param {*} params 
      * @param {*} callback 
      * @returns 
      */
-    getUserById(userData, callback) {
+     getLocationByFIlter(params, callback) {
         try {
-            model.findUser(userData, (err, result) => {
+            
+            model.findLocation(params, (err, result) => {
+                console.log("result ",result)
                 if (result) {
                     if (result.length !== 0) {
                         if (err) return callback({ message: message, statusCode: 200, success: false }, null)
                         else return callback(null, {
-                            message: "User Data",
+                            message: "Location Data",
                             result: result,
                             statusCode: 200,
                             success: true
@@ -157,21 +108,22 @@ module.exports = {
             return callback({ message: message, statusCode: 200, success: false }, null)
         }
     },
+
     /**
-     * Delete User By ID
-     * @param {*} userData 
+     * Delete Location By ID
+     * @param {*} params 
      * @param {*} callback 
      * @returns 
      */
-    deleteUserById(userData, callback) {
+    deleteLocationById(params, callback) {
         try {
-            model.findUser(userData, (err, result) => {
+            model.findLocation(params, (err, result) => {
                 if (result) {
-                    model.deleteUser(userData, (errEmp, resultEmp) => {
+                    model.deleteLocation(params, (errEmp, resultEmp) => {
                         if (resultEmp) {
                             if (errEmp) return callback({ message: message, statusCode: 200, success: false }, null)
                             else return callback(null, {
-                                message: "User Deleted Successfully",
+                                message: "Location Deleted Successfully",
                                 result: '',
                                 statusCode: 200,
                                 success: true
@@ -189,29 +141,29 @@ module.exports = {
         }
     },
     /**
-     * Update User
-     * @param {*} userData 
+     * Update Location
+     * @param {*} params 
      * @param {*} callback 
      * @returns 
      */
-    updateUser(userData, callback) {
+    updateLocation(params, callback) {
         try {
-            let empCond = { _id: userData.empId }
-            model.findUser(empCond, async (err, data) => {
+            let idCond = { _id: params.id }
+            model.findLocation(idCond, async (err, data) => {
                 if (err) return callback({ message: message, statusCode: 400 }, null)
                 else {
                     if (data.length === 0) {
                         return callback(null, {
-                            message: "User not exits",
+                            message: "Location not exits",
                             result: null,
                             statusCode: 404
                         })
                     } else {
-                        model.updateUser(empCond, userData.data, (errEmp, resultEmp) => {
+                        model.updateLocation(idCond, params.data, (errEmp, resultEmp) => {
                             if (resultEmp) {
                                 if (errEmp) return callback({ message: message, statusCode: 400 }, null)
                                 else return callback(null, {
-                                    message: "User Updated Successfully",
+                                    message: "Location Updated Successfully",
                                     result: '',
                                     statusCode: 200
                                 })

@@ -1,62 +1,29 @@
 const services = require('../services')
 
 module.exports = {
+    
     /**
-     * User Login
+     * Location Save
      * @param {*} req 
      * @param {*} res 
      * @param {*} next 
      */
-     loginUser(req, res, next) {
+     locationSave(req, res, next) {
         try {
-            let userData = {
-                email: req.body.email,
-                password: req.body.password
-            }
-            var response = {}
-
-            services.loginUser(userData, (err, result) => {
-                if (err) {
-                    response.success = err.success
-                    response.statusCode = err.statusCode
-                    response.message = err.message
-                    return res.status(err.statusCode).send(response)
-                } else {
-                    response.success = result.success
-                    response.statusCode = result.statusCode
-                    response.message = result.message
-                    response.result = result.result
-
-                    return res.status(result.statusCode).send(response)
-                }
-            })
-        } catch (err) {
-            next(err)
-        }
-    },
-    /**
-     * Register User
-     * @param {*} req 
-     * @param {*} res 
-     * @param {*} next 
-     */
-    registerUser(req, res, next) {
-        try {
-            var userData = {
-                email   : req.body.email,
+            var params = {
                 data: {
-                    firstname   : req.body.firstname,
-                    lastname    : req.body.lastname,
-                    mobile      : req.body.mobile,
-                    country     : req.body.country,
-                    email       : req.body.email,
-                    password    : req.body.password
+                    location   : req.body.location,
+                    address    : req.body.address,
+                    pincode      : req.body.pincode,
+                    company     : req.body.company,
+                    updatedBy    : req.body.createdBy,
+                    createdBy    : req.body.createdBy,
                 }
             }
             
             var response = {}
 
-            services.registerUser(userData, (err, result) => {
+            services.locationSave(params, (err, result) => {
                 if (err) {
                     response.success = err.success
                     response.statusCode = err.statusCode
@@ -81,13 +48,12 @@ module.exports = {
      * @param {*} res 
      * @param {*} next 
      */
-    getUser(req, res, next) {
+    getLocation(req, res, next) {
         try {
-            var userData = {}
-            
+            var params = {}
             var response = {}
 
-            services.getUser(userData, (err, result) => {
+            services.getLocation(params, (err, result) => {
                 if (err) {
                     response.success = false
                     response.statusCode = err.statusCode
@@ -112,15 +78,47 @@ module.exports = {
      * @param {*} res 
      * @param {*} next 
      */
-    getUserById(req, res, next) {
+    getLocationById(req, res, next) {
         try {
-            let userData = {
-                _id: req.params.employeeId
+            let params = {
+                _id: req.params.id
+            }
+            var response = {}
+
+            services.getLocationByFIlter(params, (err, result) => {
+                if (err) {
+                    response.success = false
+                    response.statusCode = err.statusCode
+                    response.message = err.message
+                    return res.status(err.statusCode).send(response)
+                } else {
+                    response.success = true
+                    response.statusCode = result.statusCode
+                    response.message = result.message
+                    response.result = result.result
+
+                    return res.status(result.statusCode).send(response)
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
+     /**
+     * Get User By Company
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+      getLocationByCompany(req, res, next) {
+        try {
+            let params = {
+                company: req.params.id
             }
             
             var response = {}
 
-            services.getUserById(userData, (err, result) => {
+            services.getLocationByFIlter(params, (err, result) => {
                 if (err) {
                     response.success = false
                     response.statusCode = err.statusCode
@@ -140,20 +138,20 @@ module.exports = {
         }
     },
     /**
-     * Delete User By ID
+     * Delete Location By ID
      * @param {*} req 
      * @param {*} res 
      * @param {*} next 
      */
-    deleteUserById(req, res, next) {
+     deleteLocationById(req, res, next) {
         try {
-            let userData = {
-                _id: req.params.employeeId
+            let params = {
+                _id: req.params.id
             }
             
             var response = {}
 
-            services.deleteUserById(userData, (err, result) => {
+            services.deleteLocationById(params, (err, result) => {
                 if (err) {
                     response.success = false
                     response.statusCode = err.statusCode
@@ -173,26 +171,28 @@ module.exports = {
         }
     },
     /**
-     * Update user by Email
+     * Update location by id
      * @param {*} req 
      * @param {*} res 
      * @param {*} next 
      */
-    updateUser(req, res, next) {
+    updateLocation(req, res, next) {
         try {
-            var userData = {
-                empId   : req.body.empId,
+            var params = {
+                id   : req.body.id,
                 data: {
-                    firstname   : req.body.firstname,
-                    lastname    : req.body.lastname,
-                    mobile      : req.body.mobile,
-                    email       : req.body.email,
-                    password    : req.body.password
+                    location   : req.body.location,
+                    address    : req.body.address,
+                    pincode      : req.body.pincode,
+                    company     : req.body.company,
+                    updatedBy    : req.body.user,
+                    updatedOn    : new Date().toLocaleString()
+
                 }
             }
             
             var response = {}
-            services.updateUser(userData, (err, result) => {
+            services.updateLocation(params, (err, result) => {
                 if (err) {
                     response.success = false
                     response.statusCode = err.statusCode

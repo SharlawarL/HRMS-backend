@@ -1,61 +1,55 @@
 const mongoose = require('mongoose')
 var message = 'Something bad happaned';
 
-const userSchema = new mongoose.Schema({
-    firstname : {
+const locationSchema = new mongoose.Schema({
+    location : {
         type : String,
         required : true
     },
-    lastname : {
+    address : {
         type : String,
         required : true
     },
-    mobile : {
-        type : String,
-        unique : true,
-        required : true
-    },
-    country : {
+    pincode : {
         type : String,
         required : true
     },
-    email : {
-        type : String,
-        trim: true,
-        lowercase: true,
-        unique: true,
-        validate: {
-            validator: function(v) {
-                return  /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/.test(v);
-            },
-            message: 'Please fill a valid email address'
-        },
-    },
-    password : {
+    company : {
         type : String,
         required : true
     },
-    createdon: {
+    updatedBy : {
+        type : String
+    },
+    updatedOn: {
+        type: String
+    },
+    createdBy : {
+        type : String,
+        required : true
+    },
+    createdOn: {
         type: String,
         default: new Date().toLocaleString()
     }
 })
 
-var User = mongoose.model('master_user',userSchema)
+var Location = mongoose.model('master_location',locationSchema)
 
 module.exports = {
-    create(userData, callback) {
+    create(params, callback) {
         try {
-            var user = new User({
-                firstname   : userData.firstname,
-                lastname    : userData.lastname,
-                mobile      : userData.mobile,
-                country     : userData.country,
-                email       : userData.email,
-                password    : userData.password,
+            var location = new Location({
+                location   : params.location,
+                address    : params.address,
+                pincode    : params.pincode,
+                company    : params.company,
+                createdBy   : params.createdBy,
+                updatedBy   : params.createdBy,
+                updatedOn   : new Date().toLocaleString()
             })
 
-            return user.save()
+            return location.save()
                 .then(result => 
                     {
                         callback(null, result)
@@ -67,9 +61,9 @@ module.exports = {
             return callback(message, null)
         }
     },
-    find(userData, callback) {
+    find(params, callback) {
         try {
-            User.find(userData, (err, data) => {
+            Location.find(params, (err, data) => {
                 if (err) return callback(err, null)
                 else return callback(null, data)
             })
@@ -77,9 +71,9 @@ module.exports = {
             return callback(message, null)
         }
     },
-    delete(userData, callback) {
+    delete(params, callback) {
         try {
-            User.deleteOne(userData, (err, data) => {
+            Location.deleteOne(params, (err, data) => {
                 if (err) return callback(err, null)
                 else return callback(null, data)
             })
@@ -87,9 +81,9 @@ module.exports = {
             return callback(message, null)
         }
     },
-    update(userCond,userData, callback) {
+    update(paramCond, paramData, callback) {
         try {
-            User.updateOne(userCond, userData, (err, data) => {
+            Location.updateOne(paramCond, paramData, (err, data) => {
                 if (err) return callback(err, null)
                 else return callback(null, data)
             })

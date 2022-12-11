@@ -14,4 +14,11 @@ module.exports = {
     getEmployeeById: require('./employeeService').getEmployeeById,
     deleteEmployeeById: require('./employeeService').deleteEmployeeById,
     updateEmployee: require('./employeeService').updateEmployee,
+
+    // Organization
+    locationSave: require('./organizationService').locationSave,
+    getLocation: require('./organizationService').getLocation,
+    getLocationByFIlter: require('./organizationService').getLocationByFIlter,
+    deleteLocationById: require('./organizationService').deleteLocationById,
+    updateLocation: require('./organizationService').updateLocation,
 }
