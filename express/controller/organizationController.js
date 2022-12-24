@@ -1,6 +1,10 @@
 const services = require('../services')
 
 module.exports = {
+
+    /**
+     *  Location
+     */
     
     /**
      * Location Save
@@ -193,6 +197,148 @@ module.exports = {
             
             var response = {}
             services.updateLocation(params, (err, result) => {
+                if (err) {
+                    response.success = false
+                    response.statusCode = err.statusCode
+                    response.message = err.message
+                    return res.status(err.statusCode).send(response)
+                } else {
+                    response.success = true
+                    response.statusCode = result.statusCode
+                    response.message = result.message
+                    response.result = result.result
+
+                    return res.status(result.statusCode).send(response)
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
+    /**
+     * Designation
+     */
+    /**
+     * Designation Save
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+     designationSave(req, res, next) {
+        try {
+            var params = {
+                check: {
+                    designation   : req.body.designation,
+                    company     : req.body.company,
+                },
+                data: {
+                    designation   : req.body.designation,
+                    company     : req.body.company,
+                    updatedBy    : req.body.createdBy,
+                    createdBy    : req.body.createdBy,
+                }
+            }
+            console.log(params)
+            
+            var response = {}
+
+            services.designationSave(params, (err, result) => {
+                if (err) {
+                    response.success = err.success
+                    response.statusCode = err.statusCode
+                    response.message = err.message
+                    return res.status(err.statusCode).send(response)
+                } else {
+                    response.success = result.success
+                    response.statusCode = result.statusCode
+                    response.message = result.message
+                    response.result = result.result
+
+                    return res.status(result.statusCode).send(response)
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
+     /**
+     * Get Designation
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+      getDesignation(req, res, next) {
+        try {
+            var params = {}
+            var response = {}
+
+            services.getDesignation(params, (err, result) => {
+                if (err) {
+                    response.success = false
+                    response.statusCode = err.statusCode
+                    response.message = err.message
+                    return res.status(err.statusCode).send(response)
+                } else {
+                    response.success = true
+                    response.statusCode = result.statusCode
+                    response.message = result.message
+                    response.result = result.result
+
+                    return res.status(result.statusCode).send(response)
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
+    /**
+     * Get User By ID
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+     getDesignationById(req, res, next) {
+        try {
+            let params = {
+                _id: req.params.id
+            }
+            
+            var response = {}
+
+            services.getDesignationByFIlter(params, (err, result) => {
+                if (err) {
+                    response.success = false
+                    response.statusCode = err.statusCode
+                    response.message = err.message
+                    return res.status(err.statusCode).send(response)
+                } else {
+                    response.success = true
+                    response.statusCode = result.statusCode
+                    response.message = result.message
+                    response.result = result.result
+
+                    return res.status(result.statusCode).send(response)
+                }
+            })
+        } catch (err) {
+            next(err)
+        }
+    },
+     /**
+     * Get User By Company
+     * @param {*} req 
+     * @param {*} res 
+     * @param {*} next 
+     */
+      getDesignationByCompany(req, res, next) {
+        try {
+            let params = {
+                company: req.params.id
+            }
+            
+            var response = {}
+
+            services.getDesignationByFIlter(params, (err, result) => {
                 if (err) {
                     response.success = false
                     response.statusCode = err.statusCode

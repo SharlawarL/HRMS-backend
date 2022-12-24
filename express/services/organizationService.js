@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt');
 module.exports = {
 
     /**
-     * Register user
+     * Location Save
      * @param {*} params 
      * @param {*} callback 
      * @returns 
@@ -176,6 +176,110 @@ module.exports = {
             })
         } catch (err) {
             return callback({ message: message, statusCode: 404 }, null)
+        }
+    },
+
+    /**
+     * Designation
+     */
+    /**
+     * Designation Save
+     * @param {*} params 
+     * @param {*} callback 
+     * @returns 
+     */
+     designationSave(params, callback) {
+        try {
+            model.findDesignation(params.check, async (err, data) => {
+                if (err) return callback({ message: message, statusCode: 200, status : false }, null)
+                else {
+                    if (data.length === 0) {
+                        model.createDesignation(params.data, (err, result) => {
+                            if (err) return callback({ message: message, statusCode: 200, status : false }, null)
+                            else {
+                                return callback(null, {
+                                    message: "Created successfully",
+                                    result: result,
+                                    statusCode: 200,
+                                    success: true
+                                })
+                            }
+                        })
+                        
+                    } else return callback(null, {
+                        message: `[${params.data.designation}] is already exits`,
+                        result: null,
+                        statusCode: 200,
+                        success: false
+                    })
+                }
+            })
+        } catch (err) {
+            return callback({ message: message, statusCode: 200, success: false }, null)
+        }
+    },
+    /**
+     * Get User
+     * @param {*} designationData 
+     * @param {*} callback 
+     * @returns 
+     */
+     getDesignation(params, callback) {
+        try {
+            model.findDesignation({}, (err, result) => {
+                if (result) {
+                    if (result.length !== 0) {
+                        if (err) return callback({ message: message, statusCode: 200, success: false }, null)
+                        else return callback(null, {
+                            message: "Designation Data",
+                            result: result,
+                            statusCode: 200,
+                            success: true
+                        })
+                    } else return callback(null, {
+                        message: "Data not found",
+                        result: null,
+                        statusCode: 200,
+                        success: false
+                    })
+                } else {
+                    return callback(null, { message: "No data found!", statusCode: 200, success: false })
+                }
+            })
+        } catch (err) {
+            return callback({ message: message, statusCode: 200, success: false }, null)
+        }
+    },
+    /**
+     * Get Location By filter
+     * @param {*} params 
+     * @param {*} callback 
+     * @returns 
+     */
+     getDesignationByFIlter(params, callback) {
+        try {
+            model.findDesignation(params, (err, result) => {
+                if (result) {
+                    if (result.length !== 0) {
+                        if (err) return callback({ message: message, statusCode: 200, success: false }, null)
+                        else return callback(null, {
+                            message: "Designation Data",
+                            result: result,
+                            statusCode: 200,
+                            success: true
+                        })
+                    } else return callback(null, {
+                        message: "Please enter valid ID",
+                        result: null,
+                        statusCode: 200,
+                        success: false
+                    })
+                } else {
+                    return callback(null, { message: "No data found!", statusCode: 200, success: false })
+                }
+            })
+        } catch (err) {
+            return callback({ message: message, statusCode: 200, success: false }, null)
         }
     },
 }

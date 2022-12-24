@@ -21,4 +21,9 @@ module.exports = {
     getLocationByFIlter: require('./organizationService').getLocationByFIlter,
     deleteLocationById: require('./organizationService').deleteLocationById,
     updateLocation: require('./organizationService').updateLocation,
+
+    // Designation
+    designationSave: require('./organizationService').designationSave,
+    getDesignation: require('./organizationService').getDesignation,
+    getDesignationByFIlter: require('./organizationService').getDesignationByFIlter,
 }

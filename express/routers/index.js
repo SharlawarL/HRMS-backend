@@ -68,7 +68,7 @@ routes.post('/employee/update-employee',
 
 
 /**
- * Organization API's
+ * Location API's
  */
 // save location
 routes.post('/organization/save-location',
@@ -94,5 +94,25 @@ routes.get('/organization/delete-location-by-id/:id',
 routes.post('/organization/update-location',
     cors(corsOptions) ,
     controller.updateLocation);
+
+/**
+ * Designation API's
+ */
+// save location
+routes.post('/designation/save-designation',
+    cors(corsOptions) ,
+    controller.designationSave);
+//Get location
+routes.get('/designation/get-designation',
+    cors(corsOptions) ,
+    controller.getDesignation);
+//get location by id
+routes.get('/designation/get-designation-by-id/:id',
+    cors(corsOptions) ,
+    controller.getDesignationById);
+//get location by company
+routes.get('/designation/get-designation-by-company/:id',
+    cors(corsOptions) ,
+    controller.getDesignationByCompany);
 
 module.exports = routes;

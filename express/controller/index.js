@@ -22,4 +22,10 @@ module.exports = {
     getLocationByCompany: require('./organizationController').getLocationByCompany,
     deleteLocationById: require('./organizationController').deleteLocationById,
     updateLocation: require('./organizationController').updateLocation,
+
+    // Designation
+    designationSave: require('./organizationController').designationSave,
+    getDesignation: require('./organizationController').getDesignation,
+    getDesignationById: require('./organizationController').getDesignationById,
+    getDesignationByCompany: require('./organizationController').getDesignationByCompany,
 }

@@ -20,6 +20,14 @@
             "description": "API's for Employee management"
         },
         {
+            "name": "Location",
+            "description": "API's for Location management"
+        },
+        {
+            "name": "Designation",
+            "description": "API's for Designation management"
+        },
+        {
             "name": "Admin",
             "description": "API's for Admin management"
         },
@@ -718,6 +726,161 @@
                     }
                 }
             }
+        },
+        "/designation/save-designation": {
+            "post": {
+                "summary": "To add new Designation",
+                "tags": [
+                    "Designation"
+                ],
+                "description": "Create new Designation in Organization",
+                "parameters": [
+                    {
+                        "name": "Designation",
+                        "in": "body",
+                        "required": true,
+                        "description": "Designation req.body fields",
+                        "schema": {
+                            "$ref": "#/definitions/SaveDesignation"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New Designation created",
+                        "schema": {
+                            "$ref": "#/definitions/SaveDesignation"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/designation/get-designation": {
+            "get": {
+                "summary": "To all Designation list",
+                "tags": [
+                    "Designation"
+                ],
+                "description": "Fetch all Designation",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get All Designation",
+                        "schema": {
+                            "$ref": "#/definitions/Designation"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/designation/get-designation-by-id/{id}": {
+            "get": {
+                "summary": "Get Designation by id",
+                "tags": [
+                    "Designation"
+                ],
+                "description": "Fetch Designation by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Designation id to fetch details"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get Designation by ID",
+                        "schema": {
+                            "$ref": "#/definitions/Designation"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/designation/get-designation-by-company/{id}": {
+            "get": {
+                "summary": "Get Designation by company",
+                "tags": [
+                    "Designation"
+                ],
+                "description": "Fetch Designation by Company",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Company id to fetch details"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get Designation by ID",
+                        "schema": {
+                            "$ref": "#/definitions/Designation"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -862,6 +1025,9 @@
         },
         "UpdateLocation": {
             "properties": {
+                "id": {
+                    "type": "string"
+                },
                 "location": {
                     "type": "string"
                 },
@@ -883,6 +1049,64 @@
             }
         },
         "DeleteLocation": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "Designation": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "designation": {
+                    "type": "string"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "type": "string"
+                },
+                "updatedOn": {
+                    "type": "string"
+                }
+            }
+        },
+        "SaveDesignation" : {
+            "properties": {
+                "designation": {
+                    "type": "string"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "createdBy": {
+                    "type": "string"
+                }
+            }
+        },
+        "UpdateDesignation" : {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "designation": {
+                    "type": "string"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "updatedBy": {
+                    "type": "string"
+                },
+                "updatedOn": {
+                    "type": "string"
+                }
+            }
+        },
+        "DeleteDesignation": {
             "properties": {
                 "id": {
                     "type": "string"
